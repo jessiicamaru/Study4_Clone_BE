@@ -33,3 +33,20 @@ export type GeneralTestReturnedInformation = {
 
     Question: Question[];
 };
+
+export type QuestionProps = {
+    id: string;
+    order: number;
+    content?: string;
+    correctAnswer?: string;
+    choosenAnswer?: string;
+    answerValue?: string;
+    answerContent?: string;
+};
+
+export type User = {
+    name: string;
+    city: string;
+    phone: string;
+    subject: string;
+};

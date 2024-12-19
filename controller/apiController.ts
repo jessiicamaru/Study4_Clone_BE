@@ -1,7 +1,7 @@
 import pool from '../config/connectDB';
 import express from 'express';
 import sql from 'mysql2';
-import { GeneralTestReturnedInformation, Question } from '../props/props';
+import { GeneralTestReturnedInformation, Question, QuestionProps, User } from '../props/props';
 
 const getLevelTest = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const { subject, name, phone, city } = req.query;
@@ -79,4 +79,26 @@ const getLevelTest = async (req: express.Request, res: express.Response, next: e
     }
 };
 
-export { getLevelTest };
+const getScore = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    try {
+        const { answer, info, time }: { answer: QuestionProps[]; info: User; time: string } = req.body.data;
+
+        console.log({ answer, info, time });
+
+        const grade = answer.map((i) => i.correctAnswer).length;
+
+        let message = '';
+
+        if (grade < 10) message = 'A1 - A2';
+        else if (grade < 15) message = 'B1 - B2';
+        else message = 'C1 - C2';
+
+        res.status(200).json({
+            message: 'ok',
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export { getLevelTest, getScore };
