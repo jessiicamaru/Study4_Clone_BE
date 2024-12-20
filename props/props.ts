@@ -20,6 +20,7 @@ export type Question = {
     AudioPath?: string;
     ImagePath?: string;
     OrderNumber: number;
+    PartOrder: number;
     Answer: Answer[];
 };
 
